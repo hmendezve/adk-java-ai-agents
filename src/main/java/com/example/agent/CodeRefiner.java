@@ -13,6 +13,7 @@ public class CodeRefiner {
             .description("Writes and refines code based on a request and feedback.")
             .instruction("""
                 Your role is to write a Python function based on the user's request.
+                Whenever you don't have any task yet, do not generate any output_key. Wait for the user to provide a request or feedback.
                 In the first turn, write the initial version of the code.
                 In subsequent turns, you will receive feedback on your code.
                 Your task is to refine the code based on this feedback.
@@ -30,7 +31,7 @@ public class CodeRefiner {
             .instruction("""
                 Your role is to act as a senior code reviewer.
                 Analyze the provided Python code for correctness, style, and potential bugs.
-
+                Only do your task if you received code, otherwise wait for the code-generator to provide code.
                 Code to review:
                 {generated_code}
 
@@ -60,7 +61,7 @@ public class CodeRefiner {
             .instruction("""
                 The code has been successfully generated and reviewed.
                 Present the final version of the code to the user in a clear format.
-
+                If there is not any code generated yet, just stay silent and wait for the code to be generated.
                 Final Code:
                 {generated_code}
                 """)
